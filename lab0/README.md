@@ -139,7 +139,8 @@ run into problems. Here are the steps we followed:
 The VMs are also running Ubuntu, with the same software pre-installed as the provided VirtualBox image. The usernames and passwords are different for different VMs, and will be
 provided as requested. 
 
-After connecting, make sure all the software is running as discussed above.
+After connecting, make sure all the software is running as discussed above. You don't have `sudo` access on these VMs, so some of the commands above
+may not work (e.g., for PostgreSQL, just do `createdb university` instead).
 
 ---
 
