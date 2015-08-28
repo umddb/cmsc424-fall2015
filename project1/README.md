@@ -81,15 +81,14 @@ construct. Order the output by name.
 upcoming birthday within next 21 days.  Assume today is Sept 1, 2015
 (so look for birthdays between Sept 1 and Sept 21). You can hardcode
 that if you'd like. The output should have two columns: user, friend_to_wish (so latter's birthday is
-in the next 3 weeks). Order by user, friend_to_wish.
-
+in the next 3 weeks). Order by user, friend_to_wish.<br>
 Hint: Use "extract" function that operates on the dates.
 
 4. For each user who has posted at least two status updates, count the
 average amount of time between his or her status updates in seconds.
 Output should contain two columns: userid, avgtime
-Order the results in the increasing order by the userid.
-Hint: Date substraction returns the amount in (fractional) number of days. 
+Order the results in the increasing order by the userid.<br>
+Hint: Date substraction returns the amount in (fractional) number of days. <br>
 Hint 2: The number of seconds in a day is 86400.
 
 5. Find the name(s) of the group with the maximum number of members. Order by the group 
@@ -102,8 +101,7 @@ and make sure that your query does not count the same user twice.
 7. For each user, report the time in days since there last status
 update. If the user has no recorded status updates, then the
 corresponding answer should be -1. Note that, such users do not 
-appear in the status table.
-
+appear in the status table.<br>
 Order the result by the userid.
 
 8. Find the names of the 5 users with the largest number of friends.
@@ -114,8 +112,7 @@ a possible "n(n-1)/2" friendship links between these "n" members
 (counting each friendship link only once). Let "m" denote the actual
 number of links that exist among the members.  We will call m/(n(n-1)/2)
 the "cohesiveness ratio". Write a query (or a set of queries) to find
-the cohesiveness ratio for all the groups. 
-
+the cohesiveness ratio for all the groups. <br>
 Order the result by groupid.
 
 10. Find the two users that were born closest to each other (there are no
