@@ -1,0 +1,66 @@
+==== 1 ==== 
+7
+==== 2 ==== 
+Anthony Roberts
+==== 3 ==== 
+Anthony Roberts ### James Walker        
+Helen Anderson ### James Walker        
+Maria Johnson ### James Walker        
+Maria King ### James Walker        
+Michael Moore ### James Walker        
+Charles Williams ### James Walker        
+Charles Gonzalez ### Sharon Taylor       
+William Parker ### Sharon Taylor       
+George Allen ### Sharon Taylor       
+Maria King ### Sharon Taylor 
+==== 4 ==== 
+user0 ### 432000
+user1 ### 302400
+user11 ### 172800
+user12 ### 172800
+user13 ### 432000
+user15 ### 288000
+user5 ### 86400
+user6 ### 172800
+user7 ### 86400
+user8 ### 259200
+user9 ### 172800
+==== 5 ==== 
+Massachusetts Institute of Technology USA
+==== 6 ==== 
+16
+==== 7 ==== 
+user0 ### 7
+user1 ### 7
+user10 ### -1
+user11 ### 14
+user12 ### 9
+user13 ### 10
+user14 ### -1
+user15 ### 7
+user16 ### -1
+user17 ### 13
+user2 ### 12
+user3 ### 16
+user4 ### -1
+user5 ### 13
+user6 ### 9
+user7 ### 12
+user8 ### 10
+user9 ### 10
+==== 8 ==== 
+Anthony Roberts ### 10
+Barbara Rodriguez ### 8
+Betty Garcia ### 7
+Carol Jones ### 6
+Charles Gonzalez ### 7
+James Walker ### 6
+==== 9 ==== 
+group0 ### 0.17857142857142857143
+group1 ### 0.26666666666666666667
+group2 ### 0.26666666666666666667
+group3 ### 0.42857142857142857143
+group4 ### 0.25757575757575757576
+==== 10 ==== 
+Margaret Smith ### William Parker      
+====
