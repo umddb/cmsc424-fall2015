@@ -155,6 +155,14 @@ it supports hosting git repositories, user management, etc. There are other simi
 We will use Github to distribute the assignments, and other class materials. Our use of git/github for the class will be minimal; however, we encourage you to use it for
 collaboration for your class project, or for other classes. 
 
+### Just Cloning the Class Repository
+You don't need a GitHub account for just cloning the class repository. Just do:
+
+`git clone https://github.com/umddb/cmsc424-fall2015.git`
+
+You can do `git pull` (from within the `cmsc424-fall2015` directory) to fetch the newly added material.
+
+### Setting up GitHub Account 
 Repositories hosted on github for free accounts are public; however, you can easily sign up for an educational account which allows you to host 5 private repositories. More
 details: https://education.github.com/
 
@@ -168,5 +176,5 @@ details: https://education.github.com/
     - In Terminal: `git clone git@github.com:umddb/cmsc424-fall2015.git`
     - The master branch should be checked out in a new directory 
 - Familiarize yourself with the basic git commands
-    - At a minimum, you would need to know: `clone`, `add`, `commit`, `push`, `pull`, `status`
-    - But you should also be familiar with how to use **branches**
+	    - At a minimum, you would need to know: `clone`, `add`, `commit`, `push`, `pull`, `status`
+	    - But you should also be familiar with how to use **branches**
