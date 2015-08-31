@@ -20,7 +20,7 @@ You are welcome to set up an environment on your own machine, but we won't be ab
 
 - Download and Install Virtual Box on your machine. 
 - **Option 1:** 
-    - Download the virtual image at: [Virtual Image](http://www.cs.umd.edu/class/fall2014/cmsc498o/UMD-CMSC498-VM.ova) (**Warning**: This is a 2GB file)
+    - Download the virtual image at: [Virtual Image](http://www.cs.umd.edu/class/fall2015/cmsc424/CMSC424.ova) (**Warning**: This is a 2.7GB file)
     - Start Virtual Box
     - From the main menu, do "Import Appliance", and point at the OVA file that you have downloaded
     - The username and password are both "terrapin"
