@@ -9,7 +9,7 @@ Installing those packages and getting started can often be a hassle, because of 
 
 * Install the different software packages on your own machine (most of these packages should have tutorials to install them on different OSs). If you have a linux and Mac, this should be possible; it may be more difficult with Windows. In any case, we would likely not be able to help you with any problems.
 * Use Virtual Box (as discussed below). We have provided an image for you to download that contains some of the basic software (or you can do it yourself directly). If you have a reasonably modern machine, VirtualBox should generally work fine, but with older laptops, the performance may not be as good. This is the recommended approach.
-* Use a VM in the CS Departments Horvitz Cluster (as discussed below). You would only be able to connect through ssh (unless you want to set up X on your machine). Make sure to take backups of all your data on those VMs (e.g., you can use `git` as discussed below).
+* Use a VM in the CS Departments Horvitz Cluster (as discussed below). You would only be able to connect through ssh (unless you want to set up X on your machine). **Make sure to take backups of all your data on those VMs (e.g., you can use `git` as discussed below). You should be prepared for those virtual machines to be removed.**
  
 ### Virtual Box
 
@@ -62,7 +62,7 @@ run into problems. Here are the steps we followed:
         - Run it: `./setup-script.sh`
             - Password: terrapin (unless you used a different password)
             - Say "yes" if you want to be prompted for each package install
-    - **Note: You will likely not be able to resize the virtual machine window. After the setup script has finished executing, click on `Devices -> Insert Guest Additions...`, and follow the instructions to install the Guest Additions. Restart the machine. Now you should be able to resize the window.**
+    - **Note: You will likely not be able to resize the virtual machine window. After the setup script has finished executing, click on `Devices -> Insert Guest Additions...`, and follow the instructions to install the Guest Additions (the password is 'terrapin' as above). Restart the machine. Now you should be able to resize the window.**
 
 - Confirm things work:
     - **java**: Run `javac` and `java -version` to ensure the programs are running
@@ -136,11 +136,14 @@ run into problems. Here are the steps we followed:
 
 ### Using a VM in the CS Horvitz Cluster
 
-The VMs are also running Ubuntu, with the same software pre-installed as the provided VirtualBox image. The usernames and passwords are different for different VMs, and will be
-provided as requested. 
+The above is the preferred approach for you to set up the computing environment. But if for any reasons you are not able to set up a VM as above, we have
+a few VMs running in the CS Horvitz Cluster. The VMs are also running Ubuntu, with the same software pre-installed as the provided VirtualBox image. However, 
+you will have to use those through `ssh`, and you would not be able to run Firefox, etc., there (at least not without some effort).
+
+The IP addresses, usernames, and passwords are different for different VMs, and will be provided as requested.  
 
 After connecting, make sure all the software is running as discussed above. You don't have `sudo` access on these VMs, so some of the commands above
-may not work (e.g., for PostgreSQL, just do `createdb university` instead).
+may not work (e.g., for PostgreSQL, just try `createdb university` followed by `psql university` instead).
 
 ---
 

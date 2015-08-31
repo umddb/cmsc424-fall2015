@@ -30,7 +30,11 @@ Following steps will get you started with creating a database and populating it 
 
    For our purposes, we will create a user with superuser priveledges. **Note: This step is already done on the VMs on Horvitz cluster -- you don't have sudo access on those machines.**
 
-   `sudo -u postgres createuser -s cmsc424`
+   `sudo -u postgres createuser -s terrapin` (on your Virtual Box VMs)
+
+   or
+
+   `sudo -u postgres createuser -s cmsc424` (on Horvitz Cluster VMs)
 
    3. After the server has started, the first step is to **create** a database, using the **createdb** command.
    PostgreSQL automatically creates one database for its own purpose, called **postgres**. It is preferable 
