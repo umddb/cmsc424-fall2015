@@ -35,7 +35,7 @@ are included in the dataset, with many users having no status updates
 during that period.
 
 In many cases (especially for complex queries or queries involving 
-``max'' or ``min''), you will find it easier to create temporary tables
+`max` or `min`), you will find it easier to create temporary tables
 using the ``with'' construct. This also allows you to break down the full 
 query and makes it easier to debug.
 
