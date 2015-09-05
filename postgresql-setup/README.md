@@ -140,6 +140,7 @@ Here are some example queries on the University dataset and the SQL for them. Th
    
 
    - `as` can be used to rename tables and simplify queries:
+
            select distinct T.name
            from instructor as T, instructor as S 
            where T.salary > S.salary and S.dept_name = 'Biology';
