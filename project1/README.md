@@ -104,7 +104,7 @@ corresponding answer should be -1. Note that, such users do not
 appear in the status table.<br>
 Order the result by the userid.
 
-8. Find the names of the 5 users with the largest number of friends.
+8. Find the names of the 5 users with the largest number of friends. If there is a tie for the 5th place, all those users should be returned (as shown in the sample answers.txt).
 
 9. Group memberships and friendships tend to be correlated. For a
 specific group "g", let "n" denote the number of its members.  There are
