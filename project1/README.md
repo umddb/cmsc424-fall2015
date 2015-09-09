@@ -80,9 +80,11 @@ construct. Order the output by name.
 3. Write a query to output a list of users and their friends, such that the friend has an
 upcoming birthday within next 21 days.  Assume today is Sept 1, 2015
 (so look for birthdays between Sept 1 and Sept 21). You can hardcode
-that if you'd like. The output should have two columns: user, friend_to_wish (so latter's birthday is
-in the next 3 weeks). Order by user, friend_to_wish.<br>
+that if you'd like. The output should have two columns: user_name, friend_to_wish (so latter's birthday is
+in the next 3 weeks). Order by user_name, friend_to_wish.<br>
 Hint: Use "extract" function that operates on the dates.
+
+IMPORTANT: Do not use `user` as the name of a column -- it is a reserved word and gives wrong answers.
 
 4. For each user who has posted at least two status updates, count the
 average amount of time between his or her status updates in seconds.
