@@ -1,8 +1,8 @@
-drop table members;
-drop table status;
-drop table friends;
-drop table groups;
-drop table users;
+drop table if exists members;
+drop table if exists status;
+drop table if exists friends;
+drop table if exists groups;
+drop table if exists users;
 create table users (userid char(10) unique, name char(20), birthdate date, joined date);
 create table groups (groupid char(10) unique, name char(100));
 create table friends (userid1 char(10) references users(userid), userid2 char(10) references users(userid));

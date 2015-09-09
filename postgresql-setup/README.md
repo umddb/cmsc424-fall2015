@@ -140,6 +140,7 @@ Here are some example queries on the University dataset and the SQL for them. Th
    
 
    - `as` can be used to rename tables and simplify queries:
+
            select distinct T.name
            from instructor as T, instructor as S 
            where T.salary > S.salary and S.dept_name = 'Biology';
@@ -157,14 +158,6 @@ Here are some example queries on the University dataset and the SQL for them. Th
 
     Now the above query would return some results.
    
-   - Create a new table that records the medals for individual sports.
-
-         create table IndividualMedals as
-         select r.player_id, e.event_id, medal, result
-         from results r, events e
-         where r.event_id = e.event_id and is_team_event = 0;
-       
-
    - *Union* operation can be used to combine information from two tables (from Section 3.5.1):
 
            (select course_id
