@@ -1,0 +1,21 @@
+<p>
+<strong>Name:</strong>
+<%= @instructor.name %>
+</p>
+
+<p>
+<strong>Department:</strong>
+<%= @instructor.office %>
+</p>
+
+<p>
+<strong>Webpage:</strong>
+<%= @instructor.webpage %>
+</p>
+
+The information about assignments available for grading should appear here. <br><br>
+
+A link to creating an assignment should also appear here. <br><br>
+
+<%= link_to 'Edit', edit_instructor_path(@instructor) %> |
+<%= link_to 'Back', instructors_path %>

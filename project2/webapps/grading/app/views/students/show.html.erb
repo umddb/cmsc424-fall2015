@@ -1,0 +1,18 @@
+<p>
+<strong>Name:</strong>
+<%= @student.name %>
+</p>
+
+<p>
+<strong>Address:</strong>
+<%= @student.address %>
+</p>
+
+<h3> Available Assignments </h3>
+The information about assignments available for submitting (or editing) should appear here.
+
+<h3> Scores for Submitted Assignments </h3>
+The information about grades for completed assignments should appear here.
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>

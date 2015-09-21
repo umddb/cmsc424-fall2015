@@ -1,0 +1,40 @@
+<h1>Editing article</h1>
+
+<%= form_for :instructor, url: instructor_path(@instructor), method: :patch do |f| %>
+ 
+  <% if @instructor.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+	<%= pluralize(@instructor.errors.count, "error") %> prohibited
+	this instructor from being saved:
+      </h2>
+      <ul>
+	<% @instructor.errors.full_messages.each do |msg| %>
+	  <li><%= msg %></li>
+	<% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :office %><br>
+    <%= f.text_area :office %>
+  </p>
+
+  <p>
+    <%= f.label :webpage %><br>
+    <%= f.text_area :webpage %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>
+ 
+<%= link_to 'Back', instructors_path %>
