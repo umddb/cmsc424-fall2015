@@ -19,7 +19,7 @@ also pretty accessible.
 
 We have created two web apps for you to get started. Both are present in the `project2` directory on the git repository.
 The `blog` webapp is the result of the Getting Started Guide from above, whereas the `grading` webapp is for you 
-to get started. See below for more details.
+to get started with the project itself. See below for more details.
 
 ### Application Scenario
 The goal of the web application development project is to build an end-to-end application 
@@ -63,8 +63,10 @@ If you are interested in publishing your app, you can try Heroku.
 
 [Heroku Ruby](https://devcenter.heroku.com/articles/getting-started-with-ruby#introduction) getting started guide discusses how to set up a basic RoR app using Heroku. Note that: Heroku requires you to use PostgreSQL (and doesn't work with SQLite which is default for Rails). So it takes a little bit of work to get started with it (and possibly installation of more stuff).
 
-### Skeleton Code and Specific Files to be Modified
+### Skeleton Code and Files to be Modified
 
 We have created the app in rails, and constructed the three entities for you (Students, Instructors, Courses). We have set up the basic webpages to show a list of all instructors, a list of all instructors, and a list of all courses as separate webpages, with links from the main page (you shouldn't need the one about courses since those are always accessed through students or instructors). The latter two are currently empty and your first task should be create those from the instructors webpages.
+
+You will have to create additional models (and controllers and views) for the other entities in your entity relationship model, and also have to set up the associations between them appropriately. You have to submit the entire source code for your app (as a zip file), along with E/R model (as a PDF).
 
 Make sure to look through the ActiveRecord guides to understand how to set up relationships between the entities, and how to access entities from other related entities (e.g., how to get information for all courses taught by an instructor, etc.).
