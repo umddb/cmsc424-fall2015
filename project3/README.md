@@ -19,21 +19,25 @@ left outer join incorrectly, and also does not reason about aggregates over NULL
 
 The final answer should look like this:
 ```
-		   userid   |         name         | count 
-		   ------------+----------------------+-------
-		   user0      | Anthony Martin       |     0
-		   user1      | Anthony Rodriguez    |    11
-		   user2      | Anthony Taylor       |    91
-		   user3      | Anthony Williams     |     0
-		   user4      | Anthony Wright       |    27
-		   (5 rows)
+	   userid   |         name         | count 
+	   ------------+----------------------+-------
+	   user0      | Anthony Martin       |     0
+	   user1      | Anthony Rodriguez    |    11
+	   user2      | Anthony Taylor       |    91
+	   user3      | Anthony Williams     |     0
+	   user4      | Anthony Wright       |    27
+	   (5 rows)
 
 ```
 
 **Question 2 (.5 pt)**: As we discussed in class, EXPLAIN can be used to see the query plan used by the database system to execute a query. For the following
 query, draw the query plan for the query, clearly showing the different operators and the options they take. The query is trying to find, for each user, how many of its friends have never written a status update. 
 
-`select f.userid1, count(*) from friends f join (select * from users where userid not in (select userid from status)) u on (u.userid = f.userid2) group by f.userid1;`
+```
+select f.userid1, count(*) 
+from friends f join (select * from users where userid not in (select userid from status)) u on (u.userid = f.userid2) 
+group by f.userid1;
+```
 
 **Question 3 (.5 pt)**: Similarly draw the query plan for the following query, and annotate which operators are responsible for creating `temp1`, `temp2`, and the final answer.
 
@@ -62,7 +66,10 @@ executes the query and also shows the **actual** number of tuples generated when
 For the following query, how well do the cardinality estimates made by the optimizer (for the outputs of different operators) match up with the actual numbers of tuples that were generated? Make sure to do this on the `socialskewed` dataset.
 
 ```
-select u.name, count(*) from users u, friends f1, status s where u.name like 'Chris%' and extract(month from status_time) = 10 and u.userid = f1.userid1 and s.userid = f1.userid2 group by u.name;
+select u.name, count(*) from users u, friends f1, status s 
+where u.name like 'Chris%' and extract(month from status_time) = 10 
+      and u.userid = f1.userid1 and s.userid = f1.userid2 
+group by u.name;
 ```
 
 **Question 5 (1 pt)**: [Trigger] Create a new table: `NumberOfStatusUpdates(userid, user_name, num_updates)`
