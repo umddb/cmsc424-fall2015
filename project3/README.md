@@ -4,7 +4,7 @@
 
 ### Assignment Questions
 
-1. (.5) Consider the following query which finds the number of status updates for users whose name starts with 'Anthony'. Before doing this, make sure to create a new
+**Question 1 (.5 pt)**: Consider the following query which finds the number of status updates for users whose name starts with 'Anthony'. Before doing this, make sure to create a new
 database with the provided `populate-socialskewed.sql` file, and use that database for all the questions here.
 
 `select u.userid, name, count(*) from users u join status s on (u.userid = s.userid and u.name like 'Anthony%') group by u.userid, name order by u.userid;`
@@ -30,12 +30,12 @@ The final answer should look like this:
 
 		```
 
-2. (.5) As we discussed in class, EXPLAIN can be used to see the query plan used by the database system to execute a query. For the following
+**Question 2 (.5 pt)**: 2. (.5) As we discussed in class, EXPLAIN can be used to see the query plan used by the database system to execute a query. For the following
 query, draw the query plan for the query, clearly showing the different operators and the options they take. The query is trying to find, for each user, how many of its friends have never written a status update. 
 
 `select f.userid1, count(*) from friends f join (select * from users where userid not in (select userid from status)) u on (u.userid = f.userid2) group by f.userid1;`
 
-3. (.5) Similarly draw the query plan for the following query, and annotate which operators are responsible for creating `temp1`, `temp2`, and the final answer.
+**Question 3 (.5 pt)**: 3. (.5) Similarly draw the query plan for the following query, and annotate which operators are responsible for creating `temp1`, `temp2`, and the final answer.
 
 ```
 with temp1 as (
@@ -56,7 +56,7 @@ where temp1.groupid = temp2.groupid
 order by temp1.groupid;
 ```
 
-4. (.5) The EXPLAIN output also shows how many tuples the optimizer expects to be generated after each operation (`rows`). EXPLAIN ANALYZE 
+**Question 4 (.5 pt)**: 4. (.5) The EXPLAIN output also shows how many tuples the optimizer expects to be generated after each operation (`rows`). EXPLAIN ANALYZE 
 executes the query and also shows the **actual** number of tuples generated when the query plan was executed. 
 
 For the following query, how well do the cardinality estimates made by the optimizer (for the outputs of different operators) match up with the actual numbers of tuples that were generated? Make sure to do this on the `socialskewed` dataset.
@@ -65,7 +65,7 @@ For the following query, how well do the cardinality estimates made by the optim
 select u.name, count(*) from users u, friends f1, status s where u.name like 'Chris%' and extract(month from status_time) = 10 and u.userid = f1.userid1 and s.userid = f1.userid2 group by u.name;
 ```
 
-5. (1) [Trigger] Create a new table: `NumberOfStatusUpdates(userid, user_name, num_updates)`
+**Question 5 (1 pt)**: 5. (1) [Trigger] Create a new table: `NumberOfStatusUpdates(userid, user_name, num_updates)`
 using the `Status` table, where you record the number of status made by each user. 
 Write a `trigger` to keep this new table updated when a new entry is inserted into 
 or a row is deleted from the Status table. Remember the user name corresponding to the 
@@ -73,7 +73,7 @@ new status update may not exist in the NumberOfStatusUpdates. Similarly, if dele
 a status update from the Status table results in a user not having any status update,
 then the tuple in NumberOfStatusUpdates should be deleted.
  
-6. (2) As we discussed in the class a few weeks ago, one of more prominent ways to use a database system is using an external client, using APIs such as ODBC and JDBC.
+**Question 6 (2 pt)**:  As we discussed in the class a few weeks ago, one of more prominent ways to use a database system is using an external client, using APIs such as ODBC and JDBC.
 This allows you to run queries against the database and access the results from within say a Java program.
 
 Here are some useful links:
