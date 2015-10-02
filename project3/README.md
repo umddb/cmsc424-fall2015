@@ -12,7 +12,7 @@ from users u join status s on (u.userid = s.userid and u.name like 'Anthony%')
 group by u.userid, name order by u.userid;
 ```
 
-The result however does not contain the users whose name contains 'Anthony' but who have no status update (e.g., `user1`). So we may consider
+The result however does not contain the users whose name contains 'Anthony' but who have no status update (e.g., `user0`). So we may consider
 modifying this query to use a left outer join instead, so we get those users as well: 
 
 ```
