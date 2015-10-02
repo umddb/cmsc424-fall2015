@@ -4,15 +4,22 @@
 
 ### Assignment Questions
 
-**Question 1 (.5 pt)**: Consider the following query which finds the number of status updates for users whose name starts with 'Anthony'. Before doing this, make sure to create a new
-database with the provided `populate-socialskewed.sql` file, and use that database for all the questions here.
+**Question 1 (.5 pt)**: Consider the following query which finds the number of status updates for users whose name starts with 'Anthony'. Before doing this, make sure to create a new database with the provided `populate-socialskewed.sql` file, and use that database for all the questions here.
 
-`select u.userid, name, count(*) from users u join status s on (u.userid = s.userid and u.name like 'Anthony%') group by u.userid, name order by u.userid;`
+```
+select u.userid, name, count(*) 
+from users u join status s on (u.userid = s.userid and u.name like 'Anthony%') 
+group by u.userid, name order by u.userid;
+```
 
 The result however does not contain the users whose name contains 'Anthony' but who have no status update (e.g., `user16`). So we may consider
 modifying this query to use a left outer join instead, so we get those users as well: 
 
-`select u.userid, name, count(*) from users u left outer join status s on (u.userid = s.userid and u.name like 'Anthony%') group by u.userid, name order by u.userid;`
+```
+select u.userid, name, count(*) 
+from users u left outer join status s on (u.userid = s.userid and u.name like 'Anthony%') 
+group by u.userid, name order by u.userid;
+```
 
 Briefly explain why this query does not return the expected answer, and rewrite the query so that it does. Note: the query has two issues -- it uses
 left outer join incorrectly, and also does not reason about aggregates over NULLs properly. 
@@ -35,7 +42,9 @@ query, draw the query plan for the query, clearly showing the different operator
 
 ```
 select f.userid1, count(*) 
-from friends f join (select * from users where userid not in (select userid from status)) u on (u.userid = f.userid2) 
+from friends f join (select * from users 
+		     where userid not in (select userid from status)) u 
+		     on (u.userid = f.userid2) 
 group by f.userid1;
 ```
 
