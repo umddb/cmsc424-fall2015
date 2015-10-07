@@ -1,50 +1,122 @@
 ==== 1 ====
-select *
-from users
-limit 5;
+select count(*) 
+from Users, Friends 
+where Users.name like 'Betty Garcia%' and Users.userid = Friends.userid1;
 
 ==== 2 ====
-select *
-from users
-limit 5;
+with temp as (
+        select name, count(*) as num_friends 
+        from users, friends 
+        where users.userid = friends.userid1 
+        group by name)
+select name 
+from temp 
+where num_friends = (select max(num_friends) from temp)
+order by name;
 
 ==== 3 ====
-select *
-from users
-limit 5;
+select u1.name as user_name, u2.name as friend_to_wish
+from users u1, friends f, users u2
+where u1.userid = f.userid1 and f.userid2 = u2.userid 
+      and extract(month from u2.birthdate) = 9 
+      and extract(day from u2.birthdate) between 1 and 21
+      order by user_name, friend_to_wish;
 
 ==== 4 ====
-select *
-from users
-limit 5;
+select userid, (max(status_time) - min(status_time))*86400/(count(*) - 1) as avgtime
+from status
+group by userid
+having count(*) > 1
+order by userid;
 
 ==== 5 ====
-select *
-from users
-limit 5;
+with temp as (
+        select groups.groupid, name, count(userid) as num_members
+        from groups, members
+        where groups.groupid = members.groupid 
+        group by groups.groupid, name
+) 
+select name
+from temp
+where num_members = (select max(num_members) from temp)
+order by name;
 
 ==== 6 ====
-select *
-from users
-limit 5;
+with temp as (
+        (
+        select users.userid, f2.userid2
+        from users, friends f1, friends f2
+        where users.name like 'Betty Garcia%' 
+              and users.userid = f1.userid1 
+              and f1.userid2 = f2.userid1
+	      and users.userid != f2.userid1
+        )
+        union
+        (
+        select users.userid, f1.userid2
+        from users, friends f1
+        where users.name like 'Betty Garcia%' 
+              and users.userid = f1.userid1
+        )
+)
+select count(*) 
+from temp;
 
 ==== 7 ====
-select *
+(
+select userid, trunc(current_date - max(status_time))
+from status
+group by userid
+)
+union
+(
+select userid, -1
 from users
-limit 5;
+where userid not in (select userid from status)
+)
+order by userid;
 
 ==== 8 ====
-select *
-from users
-limit 5;
+with temp as (
+        select u.userid, name, count(userid2) as num_friends
+        from users u, friends f
+        where u.userid = f.userid1
+        group by userid, name
+)
+select t1.name, t1.num_friends
+from temp t1
+where 5 > (select count(*)
+           from temp t2
+           where t2.num_friends > t1.num_friends
+)
+order by name;
 
 ==== 9 ====
-select *
-from users
-limit 5;
+with temp1 as (
+        select m1.groupid, count(*) as m
+        from members m1, members m2, friends f
+        where m1.groupid = m2.groupid and f.userid1 = m1.userid 
+              and f.userid2 = m2.userid and m1.userid < m2.userid
+        group by m1.groupid
+),
+temp2 as (
+    select m.groupid, count(*) as n
+    from members m
+    group by m.groupid
+)
+select temp1.groupid, 2.0*m/(n*(n-1))
+from temp1, temp2
+where temp1.groupid = temp2.groupid
+order by temp1.groupid;
 
 ==== 10 ====
-select *
-from users
-limit 5;
+with temp as (
+        select u1.name name1, u2.name name2, u1.birthdate - u2.birthdate as diff
+        from users u1, users u2
+        where u1.birthdate < u2.birthdate 
+) 
+select name1, name2
+from temp
+where abs(diff) = (select min(abs(diff)) from temp)
+order by name1;
 ====
