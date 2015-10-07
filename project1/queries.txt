@@ -49,7 +49,7 @@ with temp as (
         where users.name like 'Betty Garcia%' 
               and users.userid = f1.userid1 
               and f1.userid2 = f2.userid1
-	      and users.userid != f2.userid1
+	      and users.userid != f2.userid2
         )
         union
         (
