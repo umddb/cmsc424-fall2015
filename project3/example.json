@@ -1,2 +1,2 @@
-{ "statusupdate": { "userid": "user1", "statustime": "2015-09-25 12:57:13", "text": "This is a status update } }
+{ "statusupdate": { "userid": "user1", "statustime": "2015-09-25 12:57:13", "text": "This is a status update" } }
 { "newuser": { "userid": "user300", "name": "XYZ", "birthdate": "1991-12-06", "joined": "2011-12-06", "friends": [ {"friend_id" : "user0"}, {"friend_id" : "user100"} ] } }
