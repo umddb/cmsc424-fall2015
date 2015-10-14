@@ -108,7 +108,7 @@ Two types of updates should be supported:
 { "statusupdate": {
 	"userid": "user1",
 	"statustime": "2015-09-25 12:57:13",
-	"text": "This is a status update
+	"text": "This is a status update"
 	}
 }
 ```
