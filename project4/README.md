@@ -13,6 +13,10 @@ that is subclassed by RelationBlock and BTreeBlock (in `btree.py` file). A Relat
 captures the information stored in a BTree node.
 * `queryprocessing.py`: This contains naive implementations of some of the query processing operators, including SequentialScan, NestedLoopsJoin, and HashJoin. The operators are written using the iterator `get_next` interface, which is discussed in Chapter 12.7.2.1.
 
+There are a set of parameters that control how many tuples can be stored in each RelationBlock, how many key/ptrs can be stored in each BTreeBlock, etc. You can't set those directly, but you can set the "blockSize" and also the size of a key, etc. Those parameters are in the class `Globals`, and can be modified to constructs trees of different fanouts.
+
+**Important Note: The B+-Tree code isn't fully debugged and there may be corner cases where it fails. Let me know if you see unexpected behavior.**
+
 ### How to Use the Files
 
 The directory also contains two other files:
