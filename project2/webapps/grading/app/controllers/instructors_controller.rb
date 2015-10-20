@@ -27,7 +27,12 @@ class InstructorsController < ApplicationController
  
   def update
     @instructor = Instructor.find(params[:id])
- 
+
+    :courses
+    split(:courses)
+    for each string-course
+	Course.find(string-course)
+	
     if @instructor.update(instructor_params)
       redirect_to @instructor
     else
