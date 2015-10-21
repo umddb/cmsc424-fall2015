@@ -92,7 +92,7 @@ class NestedLoopsJoin(Operator):
 class HashJoin(Operator):
 	INNER_JOIN = 0
 	LEFT_OUTER_JOIN = 1
-	RIGHT_OUTER_JOIN = 1
+	RIGHT_OUTER_JOIN = 2
 	def __init__(self, left_child, right_child, left_attribute, right_attribute, jointype):
 		self.left_child = left_child
 		self.right_child = right_child
