@@ -65,11 +65,6 @@ def query3():
 		print "---> " + str(t)
 
 
-hash_join = HashJoin(SequentialScan(db1.getRelation("instructor")), SequentialScan(db1.getRelation("department")), "dept_name", "dept_name", HashJoin.INNER_JOIN)
-hash_join.init()
-for t in hash_join.get_next():
-	print "---> " + str(t)
-
 # Example of a search can be found in searchExample() above
 searchExample()
 
@@ -128,14 +123,3 @@ query4()
 query5()
 query6()
 query7()
-
-
-aggr = GroupByAggregate(SequentialScan(db1.getRelation("instructor")), "salary", GroupByAggregate.SUM)
-aggr.init()
-for t in aggr.get_next():
-	print "---> " + str(t)
-
-aggr = GroupByAggregate(SequentialScan(db1.getRelation("instructor")), "salary", GroupByAggregate.SUM, "dept_name")
-aggr.init()
-for t in aggr.get_next():
-	print "---> " + str(t)
