@@ -46,7 +46,6 @@ def createDatabase1(name):
 	department.insertTuple(Tuple(dept_schema, ('History', 'Painter', '50000')));
 	department.insertTuple(Tuple(dept_schema, ('Music', 'Packard', '80000')));
 	department.insertTuple(Tuple(dept_schema, ('Physics', 'Watson', '70000')));
-	department.printTuples()
 
 	# With the given settings, the following B+-Tree is identical to the one shown in
 	# Figure 11.9 in the textbook

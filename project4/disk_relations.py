@@ -106,8 +106,13 @@ class Relation:
 			self.blocks.append(n)
 		for (btree, attribute) in self.indexes:
 			btree.insert(t.getAttribute(attribute), ptr)
+	def findBlock(self, blockNumber):
+		for b in self.blocks:
+			if b.blockNumber == blockNumber:
+				return b
 	def deleteTuple(self, ptr):
-		b = self.blocks[ptr.blockNumber]
+		# We can't use the ptr.blockNumber directly -- we have to find that in the blocks we have
+		b = self.findBlock(ptr.blockNumber)
 		for (btree, attribute) in self.indexes:
 			btree.delete(key = b.getTuple(ptr.index).getAttribute(attribute), ptr = ptr)
 		b.deleteTuple(ptr.index)
