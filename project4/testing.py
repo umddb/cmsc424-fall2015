@@ -39,8 +39,18 @@ def deleteFromTree(deleteKey):
 def query1():
 	scan1 = SequentialScan(db1.getRelation("instructor"))
 	scan2 = SequentialScan(db1.getRelation("department"))
-	nl_join = NestedLoopsJoin(scan1, scan2, "dept_name", "dept_name")
+	nl_join = NestedLoopsJoin(scan2, scan1, "dept_name", "dept_name")
 	print "==================== Executing Nested Loops Join ================"
+	nl_join.init()
+	for t in nl_join.get_next():
+		print "---> " + str(t)
+
+# Set up some simple operators manually: Nested Loops Join
+def query1a():
+	scan1 = SequentialScan(db1.getRelation("department"))
+	scan2 = SequentialScan(db1.getRelation("instructor"), Predicate("salary", "80000"))
+	nl_join = NestedLoopsJoin(scan1, scan2, "dept_name", "dept_name", NestedLoopsJoin.LEFT_OUTER_JOIN)
+	print "==================== Executing Nested Loops Left Outer Join ================"
 	nl_join.init()
 	for t in nl_join.get_next():
 		print "---> " + str(t)
@@ -73,6 +83,7 @@ deleteFromTree("Srinivasan")
 
 # The following three operators work
 query1()
+query1a()
 query2()
 query3()
 

@@ -15,7 +15,7 @@ class Predicate:
 	def __init__(self, attribute, value):
 		self.attribute = attribute
 		self.value = value
-	def satisfies(self, t):
+	def satisfiedBy(self, t):
 		return t.getAttribute(self.attribute) == self.value
 
 class SequentialScan(Operator):
@@ -37,7 +37,7 @@ class SequentialScan(Operator):
 				print "Retrieving " + str(b)
 			for j in range(0, len(self.relation.blocks[i].tuples)):
 				t = b.tuples[j]
-				if t is not None and (self.predicate is None or self.predicate.satisfiedBy(self.tuples[i])):
+				if t is not None and (self.predicate is None or self.predicate.satisfiedBy(t)):
 					yield t
 	# Typically you would close any open files etc.
 	def close(self):
@@ -45,11 +45,14 @@ class SequentialScan(Operator):
 
 # We will only support Equality joins
 class NestedLoopsJoin(Operator):
-	def __init__(self, left_child, right_child, left_attribute, right_attribute):
+	INNER_JOIN = 0
+	LEFT_OUTER_JOIN = 1
+	def __init__(self, left_child, right_child, left_attribute, right_attribute, jointype = INNER_JOIN):
 		self.left_child = left_child
 		self.right_child = right_child
 		self.left_attribute = left_attribute
 		self.right_attribute = right_attribute
+		self.jointype = jointype
 
 	# Call init() on the two children
 	def init(self):
@@ -60,11 +63,21 @@ class NestedLoopsJoin(Operator):
 	# to keep track of current pointers etc
 	def get_next(self):
 		for l in self.left_child.get_next():
+			foundAMatch = False
 			for r in self.right_child.get_next():
 				if l.getAttribute(self.left_attribute) == r.getAttribute(self.right_attribute):
+					foundAMatch = True
 					output = list(l.t)
 					output.extend(list(r.t))
 					yield Tuple(None, output)
+			# If we are doing LEFT_OUTER_JOIN, we need to output a tuple if there is no match
+			if self.jointype == NestedLoopsJoin.LEFT_OUTER_JOIN and not foundAMatch:
+				output = list(l.t)
+				for i in range(0, len(self.right_child.relation.schema)):
+					output.append("NULL")
+				yield Tuple(None, output)
+			# NOTE: RIGHT_OUTER_JOIN is not easy to do with NestedLoopsJoin, so you would swap the children
+			# if you wanted to do that
 
 	# Typically you would close any open files etc.
 	def close(self):
