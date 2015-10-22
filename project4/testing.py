@@ -80,6 +80,8 @@ searchExample()
 
 # A delete that works
 deleteFromTree("Srinivasan")
+deleteFromTree("Wu")
+sys.exit(1)
 
 # The following three operators work
 query1()

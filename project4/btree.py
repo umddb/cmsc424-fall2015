@@ -313,6 +313,7 @@ class BTreeIndex:
 		# Need to deal with a pathological case here
 		if len(rootBlock.keysAndPointers) == 1:
 			self.rootPointer = rootBlock.keysAndPointers[0]
+			self.rootPointer.getBlock().parent = None
 
 	def printTree(self):
 		print "================================================================================"
@@ -324,6 +325,6 @@ class BTreeIndex:
 		print "	" + str(self.root())
 		for i in range(1, 10):
 			if nodesByLevel[i] is not None:
-				print "--- Level 1: "
+				print "--- Level {}: ".format(i)
 				for node in nodesByLevel[i]:
 					print "	" + str(node)
