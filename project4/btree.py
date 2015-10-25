@@ -262,6 +262,7 @@ class BTreeBlock(Block):
 						found = True
 						self.keysAndPointers.pop(index-1)
 						self.keysAndPointers.pop(index-1)
+						break
 				if not found:
 					raise ValueError("This should not happen")
 
