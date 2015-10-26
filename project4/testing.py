@@ -3,13 +3,14 @@ from disk_relations import *
 from btree import *
 from queryprocessing import *
 from create_sample_databases import *
+import sys
 
 # Create a sample database
 db1 = createDatabase1("univ")
 db1.getRelation("instructor").printTuples()
 db1.getRelation("department").printTuples()
 db1.getIndex("instructor", "name").printTree()
-db1.getIndex("instructor", "dept_name").printTree()
+#db1.getIndex("instructor", "dept_name").printTree()
 
 # Let's do a search -- we will print out the Blocks that were accessed during the search
 # by setting Globals.printBlockAccesses
@@ -33,7 +34,7 @@ def deleteFromTree(deleteKey):
 	db1.getRelation("instructor").deleteTuple(results[0])
 	# The BTrees should have been adjusted automatically
 	index.printTree()
-	db1.getIndex("instructor", "dept_name").printTree()
+	#db1.getIndex("instructor", "dept_name").printTree()
 
 # Set up some simple operators manually: Nested Loops Join
 def query1():
@@ -81,6 +82,11 @@ searchExample()
 # A delete that works
 deleteFromTree("Srinivasan")
 deleteFromTree("Wu")
+#Globals.printBlockAccesses = True
+#db1.getIndex("instructor", "name").printTree()
+#deleteFromTree("Brandt")
+#deleteFromTree("Mozart")
+#db1.getIndex("instructor", "name").printTree()
 sys.exit(1)
 
 # The following three operators work

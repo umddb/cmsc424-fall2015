@@ -157,7 +157,9 @@ class BTreeBlock(Block):
 				self.keysAndPointers[index].getBlock().collectNodes(mylevel+1, nodesByLevel)
 
 	def findSiblingWithSameParent(self, parentBlock):
+		print parentBlock
 		for index in range(0, len(parentBlock.keysAndPointers), 2):
+			print "** {} - {} - {}".format(index, parentBlock.keysAndPointers[index].blockNumber, self.blockNumber)
 			if parentBlock.keysAndPointers[index].blockNumber == self.blockNumber:
 				if index != 0:
 					return (parentBlock.keysAndPointers[index-2].getBlock(), parentBlock.keysAndPointers[index-1], self)
@@ -174,6 +176,10 @@ class BTreeBlock(Block):
 			return (len(self.keysAndPointers) + len(otherBlock.keysAndPointers) + 1) <= self.maxlen
 
 	def mergeEntriesFromBlock(self, otherBlock, key = None):
+		# Since we are going to delete otherBlock, need to re-point all the children of otherBlock to self
+		for i in range(0, len(otherBlock.keysAndPointers), 2):
+			if otherBlock.keysAndPointers[i] is not None:
+				otherBlock.keysAndPointers[i].getBlock().parent = Pointer(self.blockNumber)
 		if self.isLeaf:
 			# delete the last pointer and copy over
 			del self.keysAndPointers[-1]
