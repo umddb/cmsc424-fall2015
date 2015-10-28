@@ -177,14 +177,17 @@ class BTreeBlock(Block):
 
 	def mergeEntriesFromBlock(self, otherBlock, key = None):
 		# Since we are going to delete otherBlock, need to re-point all the children of otherBlock to self
-		for i in range(0, len(otherBlock.keysAndPointers)-2, 2):
-			if otherBlock.keysAndPointers[i] is not None:
-				otherBlock.keysAndPointers[i].getBlock().parent = Pointer(self.blockNumber)
 		if self.isLeaf:
+			for i in range(0, len(otherBlock.keysAndPointers)-2, 2):
+				if otherBlock.keysAndPointers[i] is not None:
+					otherBlock.keysAndPointers[i].getBlock().parent = Pointer(self.blockNumber)
 			# delete the last pointer and copy over
 			del self.keysAndPointers[-1]
 			self.keysAndPointers.extend(otherBlock.keysAndPointers)
 		else:
+			for i in range(0, len(otherBlock.keysAndPointers), 2):
+				if otherBlock.keysAndPointers[i] is not None:
+					otherBlock.keysAndPointers[i].getBlock().parent = Pointer(self.blockNumber)
 			# Here we need to add in the key that we get from the parent of these two nodes
 			self.keysAndPointers.append(key)
 			self.keysAndPointers.extend(otherBlock.keysAndPointers)
