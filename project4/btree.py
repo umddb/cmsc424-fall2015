@@ -177,7 +177,7 @@ class BTreeBlock(Block):
 
 	def mergeEntriesFromBlock(self, otherBlock, key = None):
 		# Since we are going to delete otherBlock, need to re-point all the children of otherBlock to self
-		for i in range(0, len(otherBlock.keysAndPointers), 2):
+		for i in range(0, len(otherBlock.keysAndPointers)-2, 2):
 			if otherBlock.keysAndPointers[i] is not None:
 				otherBlock.keysAndPointers[i].getBlock().parent = Pointer(self.blockNumber)
 		if self.isLeaf:

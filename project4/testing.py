@@ -80,8 +80,10 @@ def query3():
 searchExample()
 
 # A delete that works
-deleteFromTree("Srinivasan")
-deleteFromTree("Wu")
+#deleteFromTree("Srinivasan")
+#deleteFromTree("Wu")
+deleteFromTree("Crick")
+deleteFromTree("Califieri")
 #Globals.printBlockAccesses = True
 #db1.getIndex("instructor", "name").printTree()
 #deleteFromTree("Brandt")
@@ -97,6 +99,7 @@ query3()
 
 ##################################
 ### These next set of operators throw an error
+deleteFromTree("Mozart")
 deleteFromTree("Einstein")
 
 # Trying to execute a sort merge join
@@ -139,6 +142,6 @@ def query7():
 		print "---> " + str(t)
 
 query4()
-query5()
-query6()
-query7()
+#query5()
+#query6()
+#query7()
