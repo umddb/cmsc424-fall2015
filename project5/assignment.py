@@ -31,16 +31,14 @@ def example2(logsRDD):
 
 ## The following shows how to find the list of neighbors of each node, and also the degree of each node
 def example3(socialnetRDD):
-	# The following splits each line into a 2-tuple
-
 	# To compute degrees, we first use a map to output (u, 1) for every edge (u, v). Then we can compute the degrees using a reduceByKey and a sum reducer
-	degrees = rdd1.map(lambda x: (x[0], 1)).reduceByKey(lambda x, y: x + y)
+	degrees = socialnetRDD.map(lambda x: (x[0], 1)).reduceByKey(lambda x, y: x + y)
 
 	# Using groupByKey instead gives us a list of neighbors, but the list is returned as a pyspark.resultiterable.ResultIterable object
-	neighbors_1 = rdd1.groupByKey()
+	neighbors_1 = socialnetRDD.groupByKey()
 
 	# We can convert that into a list of neighbors as follows
-	neighbors_2 = rdd1.groupByKey().map(lambda x: (x[0], list(x[1])))
+	neighbors_2 = socialnetRDD.groupByKey().map(lambda x: (x[0], list(x[1])))
 
 	print degrees.take(10)
 	print neighbors_2.take(10)
