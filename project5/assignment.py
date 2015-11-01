@@ -16,7 +16,6 @@ socialnetRDD = socialnetinputRDD.map(lambda x: x.split("\t")).map(lambda x: (int
 def example1(playRDD):
 	counts = playRDD.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
 	print counts.sortByKey().take(100)
-	counts.saveAsTextFile("output")
 
 ## The following shows how to find all unique hosts making requests -- returns an RDD
 def extractHost(logline):
