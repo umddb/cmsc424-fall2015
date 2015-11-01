@@ -1,4 +1,6 @@
-from pyspark import SparkContext, SparkConf
+from pyspark import SparkContext
+
+sc = SparkContext("local", "Simple App")
 
 textFile = sc.textFile("README.md")
 
