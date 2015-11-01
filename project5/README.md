@@ -110,6 +110,7 @@ intersection of the two sets and divide by the size of the union of the two sets
 
 * **Task 5**: `task5_pagerank` should implement one iteration of the standard algorithm for computing PageRanks (see [Wikipedia Page](https://en.wikipedia.org/wiki/PageRank) for more details on PageRank). This is an iterative algorithm that uses the values computed in the previous iteration to re-compute the values for the next iteration. Specifically, you should implement the formula described in the above Wikipedia page in the section `Damping Factor`. Use the damping factor of 0.85. The result should be an RDD that looks very similar to `initial_pageranks` but with new values (note that since RDDs are immutable, you have to construct a new RDD and return it).
 
+You can use spark-submit to run the `assignment.py` file, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
 
 ### Submission
 
