@@ -8,4 +8,4 @@ counts = textFile.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 
 
 print counts.sortByKey().take(100)
 
-counts.saveAsTextFile("output")
+#counts.saveAsTextFile("output")
