@@ -18,14 +18,11 @@ Spark can be used with the Hadoop ecosystem, including the HDFS file system and 
 Spark is already installed on the virtual machines. However, since there has been a significant version change since then, we will install and use the latest version.
 
 1. Download the Spark package at http://spark.apache.org/downloads.html. We will use **Version 1.5.1, Pre-built for CDH 4**.
-
 2. Move the downloaded file to the `/home/terrapin/spark` directory (or somewhere else), and uncompress it using: 
-
 `tar zxvf spark-1.5.1-bin-cdh4.tgz`
-
 3. This will create a new directory: `spark-1.5.1-bin-cdh4`. 
-
 4. Set the SPARKHOME variable: `export SPARKHOME=/home/terrapin/spark/spark-1.5.1-bin-cdh4` (modify accordingly if you uncompressed it somewhere else)
+5. If you want to reduce the amount of output that SPARK is producing, copy the `log4j.properties` file into `$SPARKHOME/conf`.
 
 We are ready to use Spark. 
 
@@ -51,7 +48,7 @@ application.
 
 #### Word Count Application
 
-The following command (in the pyspark shell) does the word count.
+The following command (in the pyspark shell) does a word count, i.e., it counts the number of times each word appears in the file `README.md`. Use `counts.take(5)` to see the output.
 
 `>>> counts = textfile.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)`
 
@@ -93,24 +90,25 @@ We have provided a Python file: `assignment.py`, that initializes the folllowing
 
 The file also contains 3 examples of operations on these RDDs. 
 
-Your tasks are to fill out the 5 functions that are defined in the `functions.py` file (starting with `task`).
+Your tasks are to fill out the 5 functions that are defined in the `functions.py` file (starting with `task`). The amount of code that you 
+write would be very small (the first one would be a one-liner).
 
-* Task 1: This takes as input the playRDD and a list of words, and should count the number of different lines in which each of those words appeared.
+* **Task 1**: This takes as input the playRDD and a list of words, and should count the number of different lines in which each of those words appeared.
 
-* Task 2:  [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams
+* **Task 2**:  [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams
 are", "are simply", "simply sequences", "sequences of", etc.
 Your task is to write a **Bigram Counting** application that can be composed as a two stage Map-Reduce job. 
 	- The first stage counts bigrams.
-    	- The second stage MapReduce job takes the output of the first stage (bigram counts) and computes for each word the top 5 bigrams by count that it is a part of, and the bigram count associated with each.
+	- The second stage MapReduce job takes the output of the first stage (bigram counts) and computes for each word the top 5 bigrams by count that it is a part of, and the bigram count associated with each.
 Only count bigrams that appear within a single line (i.e., don't worry about bigrams where one word is the end of one line and the second word is the beginning of next.
 The return value should be an PairRDD where the key is a word, and the value is the top 5 bigrams by count that it is a part of.
 
-* Task 3: Here the goal is to count the Jaccard similarity between two given hosts. In other words, find the set of the URLs visited by each of the two hosts, count the size of the
-intersection of the two sets and divide by the size of the union of the two sets. The format of the log entries should be self-explanatory, but here are more details if you need: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
+* **Task 3**: Here the goal is to count the [Jaccard Index](https://en.wikipedia.org/wiki/Jaccard_index) between two given hosts. In other words, find the set of the URLs visited by each of the two hosts, count the size of the
+intersection of the two sets and divide by the size of the union of the two sets (don't forget to use `distinct()` to remove duplicates from the sets). The format of the log entries should be self-explanatory, but here are more details if you need: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
 
-* Task 4: For the logsRDD, count the top 5 URLs that have been visited.  You will first need to figure out how to parse the log lines appropriately to extract the URLs. The return should just be the list of 5 URLs.
+* **Task 4**: For the logsRDD, count the top 5 URLs that have been visited.  You will first need to figure out how to parse the log lines appropriately to extract the URLs. The return should just be the list of 5 URLs.
 
-* Task 5: `task5_pagerank` should implement one iteration of the standard algorithm for computing PageRanks (see [Wikipedia Page](https://en.wikipedia.org/wiki/PageRank) for more details on PageRank). This is an iterative algorithm that uses the values computed in the previous iteration to re-compute the values for the next iteration. Specifically, you should implement the formula described in the above Wikipedia page in the section `Damping Factor`. Use the damping factor of 0.85. The result should be an RDD that looks very similar to `initial_pageranks` but with new values (note that since RDDs are immutable, you have to construct a new RDD and return it).
+* **Task 5**: `task5_pagerank` should implement one iteration of the standard algorithm for computing PageRanks (see [Wikipedia Page](https://en.wikipedia.org/wiki/PageRank) for more details on PageRank). This is an iterative algorithm that uses the values computed in the previous iteration to re-compute the values for the next iteration. Specifically, you should implement the formula described in the above Wikipedia page in the section `Damping Factor`. Use the damping factor of 0.85. The result should be an RDD that looks very similar to `initial_pageranks` but with new values (note that since RDDs are immutable, you have to construct a new RDD and return it).
 
 
 ### Submission
