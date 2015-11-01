@@ -26,5 +26,5 @@ def task4_top_5_URLs(logsRDD):
 # current PageRank for the vertices
 # Compute the new PageRank for the vertices and return that RDD
 def task5_pagerank(socialnetRDDs, pagerankPreviousIterationRDD):
-	return None
+	return socialnetRDDs
 
