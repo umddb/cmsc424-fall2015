@@ -3,6 +3,7 @@ from disk_relations import *
 from btree import *
 from queryprocessing import *
 from create_sample_databases import *
+from grading import *
 import sys
 
 # Create a sample database
@@ -77,18 +78,34 @@ def query3():
 
 
 # Example of a search can be found in searchExample() above
-searchExample()
+#searchExample()
 
 # A delete that works
+#deleteFromTree("Einstein")
 #deleteFromTree("Srinivasan")
 #deleteFromTree("Wu")
-deleteFromTree("Crick")
-deleteFromTree("Califieri")
+#deleteFromTree("Crick")
+#deleteFromTree("Califieri")
 #Globals.printBlockAccesses = True
 #db1.getIndex("instructor", "name").printTree()
 #deleteFromTree("Brandt")
 #deleteFromTree("Mozart")
 #db1.getIndex("instructor", "name").printTree()
+#sys.exit(1)
+
+instr = db1.getRelation("instructor")
+instr.insertTuple(Tuple(instr.schema, ('98347', 'Z1', 'Comp. Sci.', '65000')))
+instr.insertTuple(Tuple(instr.schema, ('98348', 'Z2', 'Comp. Sci.', '65000')))
+instr.insertTuple(Tuple(instr.schema, ('98349', 'Z3', 'Comp. Sci.', '65000')))
+instr.insertTuple(Tuple(instr.schema, ('98350', 'Z4', 'Comp. Sci.', '65000')))
+deleteFromTree("Brandt")
+deleteFromTree("Califieri")
+deleteFromTree("Crick")
+deleteFromTree("Einstein")
+deleteFromTree("Gold")
+db1.getIndex("instructor", "name").printTree()
+
+checkValidityTree(db1.getIndex("instructor", "name"))
 sys.exit(1)
 
 # The following three operators work

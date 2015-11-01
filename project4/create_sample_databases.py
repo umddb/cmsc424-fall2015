@@ -16,6 +16,7 @@ class Database:
 		return self.relations[relname]
 	def newIndex(self, relname, attribute, keysize):
 		self.indexes[(relname, attribute)] = BTreeIndex(keysize = keysize, relation = self.getRelation(relname), attribute = attribute)
+		return self.indexes[(relname, attribute)]
 	def getIndex(self, relname, attribute):
 		return self.indexes[(relname, attribute)]
 
