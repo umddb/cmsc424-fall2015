@@ -1,6 +1,8 @@
-from pyspark import SparkContext, SparkConf
+from pyspark import SparkContext
 import re
 from functions import *
+
+sc = SparkContext("local", "Simple App")
 
 ## Load data into RDDs
 playRDD = sc.textFile("play.txt")
