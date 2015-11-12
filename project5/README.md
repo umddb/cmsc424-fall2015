@@ -35,7 +35,7 @@ do more fun things with it like draw plots and visualizations).
 
 ### PySpark Shell
 
-1. `$SPARK_HOME/bin/pyspark`: This will start a Python shell (it will also output a bunch of stuff about what Spark is doing). The relevant variables are initialized in this python
+1. `$SPARKHOME/bin/pyspark`: This will start a Python shell (it will also output a bunch of stuff about what Spark is doing). The relevant variables are initialized in this python
 shell, but otherwise it is just a standard Python shell.
 
 2. `>>> textFile = sc.textFile("README.md")`: This creates a new RDD, called `textFile`, by reading data from a local file. The `sc.textFile` commands create an RDD
