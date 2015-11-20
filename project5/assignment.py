@@ -58,7 +58,7 @@ print "The Jaccard Similarity between hosts {} and {} is {}".format(host1, host2
 print task4_top_5_URLs(logsRDD)
 
 # The following creates an initial set of PageRanks to pass to the iterative function
-vertices = socialnetRDD.map(lambda x: x[0]).distinct()
+vertices = socialnetRDD.flatMap(lambda x: [x[0], x[1]]).distinct()
 count_vertices = vertices.count()
 initial_pageranks = vertices.map(lambda x: (x, 1.0/count_vertices))
 print task5_pagerank(socialnetRDD, initial_pageranks).take(10)
