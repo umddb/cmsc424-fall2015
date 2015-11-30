@@ -232,9 +232,10 @@ class TransactionManager:
 		with TransactionManager.tm_lock:
 			return transaction_id in TransactionManager.abortlist
 
+	@staticmethod
 	def signalAbortTransaction(transaction_id):
 		with TransactionManager.tm_lock:
-			abortlist.append(transaction_id)
+			TransactionManager.abortlist.append(transaction_id)
 
 
 class TransactionState:
