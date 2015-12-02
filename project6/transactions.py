@@ -139,7 +139,7 @@ class LogManager:
 			allrecords = [LogManager.readLogRecord(line) for line in f.readlines()]
 			f.close()
 		if allrecords:
-			TransactionManager.last_transaction_id = max(allrecords, key=lambda lr: lr.info[0])
+			TransactionManager.last_transaction_id = max(allrecords, key=lambda lr: lr.info[0]).info[0]
 			print "Setting the last_tranasction_id to be " + str(TransactionManager.last_transaction_id)
 
 			lastrecord = allrecords[-1]
@@ -157,7 +157,7 @@ class LogManager:
 	@staticmethod
 	def restartRecovery():
 		print "Starting Restart Recovery......."
-		raise ValueError("Functionality to be implemented")
+		#raise ValueError("Functionality to be implemented")
 
 		# After the restart recovery is done (i.e., all the required changes redone, all the incomplete transactions
 		# undone, and all the pages have been written to disk), we can now write out a CHECKPOINT record to signify
