@@ -75,6 +75,8 @@ class LockTable:
 
 				# When the transaction is awake, there is a possibility that it needs to be aborted
 				if TransactionManager.hasBeenAborted(transaction_id):
+					# Remove the transaction from the waiting list
+					e.waiting_transactions_and_locks.remove( (transaction_id, locktype) )
 					return False
 
 	@staticmethod
@@ -87,10 +89,29 @@ class LockTable:
 				cond.notifyAll()
 
 	@staticmethod
+	def detectDeadlocksAndChooseTransactionsToAbort():
+		############################################
+		####
+		#### Your deadlock detection code here -- it should use the lockhashtable to check for deadlocks
+		####
+		#### If deadlocks are found, you should create a list of transaction_ids to abort, and return it.
+		#### detectDeadlocks() will take care of calling signalAbortTransaction() -- see below
+		#### 
+		#### Make sure to lock the hash table (using "with" as above) before processing it
+		####
+		############################################
+
+		# Return the list of transactions to be aborted (empty if none)
+		return []
+
+	@staticmethod
 	def detectDeadlocks():
 		while True:
 			print "Running deadlock detection algorithm..."
 			time.sleep(10)
+
+			for tid in LockTable.detectDeadlocksAndChooseTransactionsToAbort():
+				TransactionManager.signalAbortTransaction(tid)
 
 			############################################
 			####
@@ -275,7 +296,7 @@ class TransactionState:
 		return [relation.fileName, LockTable.X] in self.locks or self.getLock(relation.fileName, LockTable.X)
 
 	def getSLockTuple(self, relation, primary_id):
-		if (relation.fileName, LockTable.IS) not in self.locks and (relation.fileName, LockTable.S) not in self.locks:
+		if [relation.fileName, LockTable.IS] not in self.locks and [relation.fileName, LockTable.S] not in self.locks:
 			return self.getLock(relation.fileName, LockTable.IS) and self.getLock(primary_id, LockTable.S)
 		else:
 			return self.getLock(primary_id, LockTable.S)

@@ -55,9 +55,9 @@ Your task is to finish a few of the unfinished pieces in the two files (1 point 
 is locked. This
 is of course not ideal and we would prefer to use IX locks (on the relation) to speed up concurrency. The code for this will largely mirror the code for IS. You will 
 have to change the `getXLockTuple()` function and also the `compatibility_list` appropriately. 
-* Function `detectDeadlocks()` in `transactions.py`: The deadlock detection code is called once every few seconds. You should analyze the `waits-for` graph and figure out 
-if there are any deadlocks and decide which transactions to abort to resolve it. This code only needs to call `signalAbortTransaction` on the appropriate transaction -- our
-code handles the actual abort.
+* Function `detectDeadlocksAndChooseTransactionsToAbort()` in `transactions.py`: The deadlock detection code is called once every few seconds. You should analyze the `waits-for` graph and figure out 
+if there are any deadlocks and decide which transactions to abort to resolve it. This function only needs to decide which transactions to kill --  our
+code handles the actual abort (see `detectDeadlocks()`).
 * Function `restartRecovery()` in `transaction.py`: This function is called if the log file indicates an inconsistecy (specifically if the logfile does not end with an empty CHECKPOINT record). If that's the case, then you must analyze the logfile and do a recovery on that.
 
 ### Submission
