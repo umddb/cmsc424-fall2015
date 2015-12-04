@@ -94,7 +94,7 @@ class Relation:
 			dataFile = open(fileName, 'r')
 			infojson = dataFile.read(Globals.blockSize)
 			[self.schema, self.numBlocks, self.index] = byteify(json.loads(infojson))
-			print "Read relation " + str(self.schema) + " with index: " + str(self.index) 
+			#print "Read relation " + str(self.schema) + " with index: " + str(self.index) 
 			dataFile.close()
 		else: 
 			self.schema = ['ID', 'A']
@@ -130,7 +130,7 @@ class Relation:
 		return be.block.getTuple(primary_id)
 
 	def findBlockContainingTuple(self, primary_id):
-		print self.index
+		#print self.index
 		return int(self.index[primary_id])
 	
 	def readBlockIntoMemory(self, diskBlockNumber):

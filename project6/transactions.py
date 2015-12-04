@@ -17,6 +17,7 @@ class LockTable:
 	S = 0
 	X = 1
 	IS = 2
+	IX = 3
 
 	# Compatibility matrix
 	compatibility_list = [(IS, IS), (IS, S), (S, IS), (S, S)]
@@ -70,7 +71,7 @@ class LockTable:
 						e.waiting_transactions_and_locks.append((transaction_id, locktype))
 
 				# If the lock has not been granted, we must wait for someone to release the lock
-				cond.wait(100)
+				cond.wait(15)
 				print "Notified that the lock has been released, or Time Out -- checking again"
 
 				# When the transaction is awake, there is a possibility that it needs to be aborted
@@ -111,18 +112,8 @@ class LockTable:
 			time.sleep(10)
 
 			for tid in LockTable.detectDeadlocksAndChooseTransactionsToAbort():
+				print "Signaling Transaction {} to abort".format(tid)
 				TransactionManager.signalAbortTransaction(tid)
-
-			############################################
-			####
-			#### Your deadlock detection code here -- it should use the lockhashtable to check for deadlocks
-			#### It should call TransactionManager.signalAbortTransaction(transaction_id) to signal a transaction
-			#### that it should abort
-			#### Make sure to lock the hash table (using "with" as above) before processing it
-			####
-			############################################
-
-
 
 #######################################################################################################
 # Logging Stuff
@@ -266,6 +257,7 @@ class TransactionState:
 
 	# Go backwards in the lock undoing all the changes, and then release all the locks
 	def abortTransaction(self):
+		print "Aborting transaction {}".format(self.transaction_id)
 		LogManager.revertChanges(self.transaction_id)
 		LogManager.createAbortLogRecord(self.transaction_id)
 		for [objectid, locktype] in reversed(self.locks):
