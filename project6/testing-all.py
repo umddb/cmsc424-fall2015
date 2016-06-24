@@ -31,14 +31,14 @@ if sys.argv[1] in ['test1-deadlocks', 'test2-deadlocks']:
 		t = threading.Thread(target=Transaction3, args=(r, "30", "20"))
 		t.start()
 
-	time.sleep(5)
+	time.sleep(25)
 	print "Calling deadlock detection code..."
 	print "Need to abort transactions: " + str(LockTable.detectDeadlocksAndChooseTransactionsToAbort())
 
 	if sys.argv[1] == 'test1-deadlocks':
-		print "Answer should be either: T1, or T2, or T3"
+		print "Answer should be either: T1, or T2, or T3 (the specific transaction ID's might be different if you use an existing logfile)"
 	elif sys.argv[1] == 'test2-deadlocks':
-		print "Answer should contain one of T1 and T2, and one of T3 and T4"
+		print "Answer should contain one of T1 and T2, and one of T3 and T4  (the specific transaction ID's might be different if you use an existing logfile)"
 	os._exit(0)
 elif sys.argv[1] == 'test3-recovery':
 	if not os.path.isfile(sys.argv[2]) or not os.path.isfile(sys.argv[3]):
