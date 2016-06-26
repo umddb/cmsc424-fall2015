@@ -60,6 +60,8 @@ class RelationTuple:
 			if attr == attribute:
 				return self.t[i] 
 		raise ValueError("Should not reach here")
+	def __eq__(self, other):
+		return self.schema == other.schema and self.t == other.t
 
 class Relation: 
 	def __init__(self, name, schema):
@@ -68,6 +70,9 @@ class Relation:
 		self.schema = schema 
 	def add(self, t):
 		self.tuples.append(t)
+	def addIfNotDuplicate(self, t):
+		if t not in self.tuples:
+			self.tuples.append(t)
 	def printtuples(self):
 		for t in self.tuples:
 			print t
@@ -109,7 +114,7 @@ def pi(r, attrlist):
 	result = Relation("", attrlist)
 	for t in r.tuples:
 		newt = RelationTuple(result.schema, [t.getAttribute(attr) for attr in attrlist])
-		result.add(newt) 
+		result.addIfNotDuplicate(newt) 
 	return result
 r2 = pi(r, ['A', 'B'])
 r2.prettyprint()
@@ -128,6 +133,42 @@ def cartesian(r1, r2):
 r3 = cartesian(r, s)
 r3.prettyprint()
 
+# A Union is a binary operator -- both the input relations are required to have the same schema
+def union(r1, r2):
+	result = Relation("", r1.schema)
+	for t1 in r1.tuples:
+		newt = RelationTuple(result.schema, t1.t)
+		result.add(newt) 
+	for t2 in r2.tuples:
+		newt = RelationTuple(result.schema, t2.t)
+		result.addIfNotDuplicate(newt) 
+	return result
+
+ru1 = Relation('ru1', ['A', 'B', 'C'])
+ru1.add(RelationTuple(ru1.schema, [1, 2, 3]))
+ru1.add(RelationTuple(ru1.schema, [2, 2, 3]))
+ru1.prettyprint()
+ru2 = Relation('ru2', ['A', 'B', 'C'])
+ru2.add(RelationTuple(ru2.schema, [1, 2, 3]))
+ru2.add(RelationTuple(ru2.schema, [2, 3, 3]))
+ru2.prettyprint()
+print "======== CHECKING UNION ======="
+ru3 = union(ru1, ru2)
+ru3.prettyprint()
+
+# A Set Difference is a binary operator -- both the input relations are required to have the same schema
+def minus(r1, r2):
+	result = Relation("", r1.schema)
+	for t1 in r1.tuples:
+		if t1 not in r2.tuples:
+			newt = RelationTuple(result.schema, t1.t)
+			result.add(newt) 
+	return result
+print "======== CHECKING DIFFERENCE ======="
+ru4 = minus(ru1, ru2)
+ru4.prettyprint()
+
+
 # A join is a cartesian product followed by a predicate
 def join(r1, r2, predicate):
 	# Result relation will have attributes from both the relations
@@ -140,6 +181,7 @@ def join(r1, r2, predicate):
 				result.add(newt) 
 	return result
 
+print "======== CHECKING JOIN ======="
 r4 = join(r, s, BinaryPredicate("r.C", "==", "s.C"))
 r4.prettyprint()
 
